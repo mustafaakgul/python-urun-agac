@@ -1,0 +1,206 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h3>Alt Ürün Tabloları</h3>
+
+<hr>
+
+<p>Oluşturmak istediğiniz 3 tablonun sırayla ID' lerini giriniz.</p>
+
+<form method="post">
+{% csrf_token %}
+<div class="container-fluid">
+  <div class="row">
+    <input class="col-sm-2" type="text" name="seleid">
+    <input class="col-sm-2" type="text" name="tekerlekid">
+    <input class="col-sm-2" type="text" name="govdeid">
+    <button type="submit" class="col-sm-3">Oluştur</button>
+  </div>
+</div>
+</form>
+
+{% if seleler %}
+<table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Sele İsmi</th>
+            <th scope="col">Renk</th>
+            <th scope="col">Kod</th>
+            <th scope="col">Tedarikçi</th>
+            <th scope="col">SKT</th>
+            <th scope="col">Geliş Tarihi</th>
+            <th scope="col">Baglantılar</th>
+            <th scope="col">QR</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for sele in seleler %}
+          <tr>
+            <th scope="row">{{sele.id}}</th>
+            <td><a href="">{{sele.sele_ismi}}</a></td>
+            <td>{{sele.renk}}</td>
+            <td>{{sele.kod}}</td>
+            <td>{{sele.tedarikci}}</td>
+            <td>{{sele.skt}}</td>
+            <td>{{sele.gelis_tarihi}}</td>
+            <td>{{sele.baglantili_parcalar}}</td>
+            <td><a href="{% url 'qrkod_sele' sele.id %}" class = "btn btn-danger">QR Oluştur</a> </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+{% endif %}
+
+<hr>
+
+    {% if tekerlekler %}
+<table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Teker İsmi</th>
+            <th scope="col">Jant</th>
+            <th scope="col">Lastik</th>
+            <th scope="col">Ölçü</th>
+            <th scope="col">Kod</th>
+            <th scope="col">Tedarikçi</th>
+            <th scope="col">SKT</th>
+            <th scope="col">Geliş Tarihi</th>
+            <th scope="col">Bağlantılar</th>
+            <th scope="col">QR</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for tekerlek in tekerlekler %}
+          <tr>
+            <th scope="row">{{tekerlek.id}}</th>
+            <td><a href="">{{tekerlek.teker_ismi}}</a></td>
+            <td>{{tekerlek.jant}}</td>
+            <td>{{tekerlek.lastik}}</td>
+            <td>{{tekerlek.olcu}}</td>
+            <td>{{tekerlek.kod}}</td>
+            <td>{{tekerlek.tedarikci}}</td>
+            <td>{{tekerlek.skt}}</td>
+            <td>{{tekerlek.gelis_tarihi}}</td>
+            <td>{{tekerlek.baglantili_parcalar}}</td>
+            <td><a href="{% url 'qrkod_tekerlek' tekerlek.id %}" class = "btn btn-danger">QR Oluştur</a> </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+{% endif %}
+
+    <hr>
+
+    {% if govdeler %}
+<table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Gövde İsmi</th>
+            <th scope="col">Kadro</th>
+            <th scope="col">Vites</th>
+            <th scope="col">Kod</th>
+            <th scope="col">Tedarikçi</th>
+            <th scope="col">SKT</th>
+            <th scope="col">Geliş Tarihi</th>
+            <th scope="col">Baglantılar</th>
+            <th scope="col">QR</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for govde in govdeler %}
+          <tr>
+            <th scope="row">{{govde.id}}</th>
+            <td><a href="">{{govde.govde_ismi}}</a></td>
+            <td>{{govde.kadro}}</td>
+            <td>{{govde.vites}}</td>
+            <td>{{govde.kod}}</td>
+            <td>{{govde.tedarikci}}</td>
+            <td>{{govde.skt}}</td>
+            <td>{{govde.gelis_tarihi}}</td>
+            <td>{{govde.baglantili_parcalar}}</td>
+            <td><a href="{% url 'qrkod_govde' govde.id %}" class = "btn btn-danger">QR Oluştur</a> </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+{% endif %}
+
+
+    {% if bisikletler %}
+<table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Sele İsmi</th>
+            <th scope="col">Renk</th>
+            <th scope="col">Sele Kod</th>
+            <th scope="col">Sele Tedarikçi</th>
+            <th scope="col">Sele SKT</th>
+            <th scope="col">Sele Geliş</th>
+            <th scope="col">Sele Baglantılar</th>
+            <th scope="col">Teker İsmi</th>
+            <th scope="col">Jant</th>
+            <th scope="col">Lastik</th>
+            <th scope="col">Ölçü</th>
+            <th scope="col">Teker Kod</th>
+            <th scope="col">Teker Tedarikçi</th>
+            <th scope="col">Teker SKT</th>
+            <th scope="col">Teker Geliş Tarihi</th>
+            <th scope="col">Teker Baglantılar</th>
+            <th scope="col">Gövde İsmi</th>
+            <th scope="col">Kadro</th>
+            <th scope="col">Vites</th>
+            <th scope="col">Gövde Kod</th>
+            <th scope="col">Gövde Tedarikçi</th>
+            <th scope="col">Gövde SKT</th>
+            <th scope="col">Gövde Geliş Tarihi</th>
+            <th scope="col">Gövde Bağlantılar</th>
+            <th scope="col">QR</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for bisiklet in bisikletler %}
+          <tr>
+            <th scope="row">{{bisiklet.id}}</th>
+                <td>{{bisiklet.sele_ismi}}</td>
+                <td>{{bisiklet.renk}}</td>
+                <td>{{bisiklet.sele_kod}}</td>
+                <td>{{bisiklet.sele_tedarikci}}</td>
+                <td>{{bisiklet.sele_skt}}</td>
+                <td>{{bisiklet.sele_gelis_tarihi}}</td>
+                <td>{{bisiklet.sele_baglantili_parcalar}}</td>
+                <td>{{bisiklet.teker_ismi}}</td>
+                <td>{{bisiklet.jant}}</td>
+                <td>{{bisiklet.lastik}}</td>
+                <td>{{bisiklet.olcu}}</td>
+                <td>{{bisiklet.teker_kod}}</td>
+                <td>{{bisiklet.teker_tedarikci}}</td>
+                <td>{{bisiklet.teker_skt}}</td>
+                <td>{{bisiklet.teker_gelis_tarihi}}</td>
+                <td>{{bisiklet.teker_baglantili_parcalar}}</td>
+                <td>{{bisiklet.govde_ismi}}</td>
+                <td>{{bisiklet.kadro}}</td>
+                <td>{{bisiklet.vites}}</td>
+                <td>{{bisiklet.govde_kod}}</td>
+                <td>{{bisiklet.govde_tedarikci}}</td>
+                <td>{{bisiklet.govde_skt}}</td>
+                <td>{{bisiklet.govde_gelis_tarihi}}</td>
+                <td>{{bisiklet.govde_baglantili_parcalar}}</td>
+                <td><a href="{% url 'qrkod_bisiklet' bisiklet.id %}" class = "btn btn-danger">QR Oluştur</a> </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+{% endif %}
+
+
+
+{% endblock body %}
+
