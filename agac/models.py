@@ -1,6 +1,15 @@
 from django.db import models
 
-class Sele(models.Model):
+
+class Base(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        abstract = True
+
+class Sele(Base):
     sele_ismi = models.CharField(max_length=100)
     renk = models.CharField(max_length=100)
     kod = models.CharField(max_length=100)
@@ -9,7 +18,7 @@ class Sele(models.Model):
     gelis_tarihi = models.CharField(max_length=100)
     baglantili_parcalar = models.CharField(max_length=100)
 
-class Tekerlek(models.Model):
+class Tekerlek(Base):
     teker_ismi = models.CharField(max_length=100)
     jant = models.CharField(max_length=100)
     lastik = models.CharField(max_length=100)
@@ -21,7 +30,7 @@ class Tekerlek(models.Model):
     baglantili_parcalar = models.CharField(max_length=100)
 
 
-class Govde(models.Model):
+class Govde(Base):
     govde_ismi = models.CharField(max_length=100)
     kadro = models.CharField(max_length=100)
     vites = models.CharField(max_length=100)
@@ -33,7 +42,7 @@ class Govde(models.Model):
 
 
 #Bisiklet Ürün Agacı
-class Bisiklet(models.Model):
+class Bisiklet(Base):
     sele_ismi = models.CharField(max_length=100, null=True)
     renk = models.CharField(max_length=100, null=True)
     sele_kod = models.CharField(max_length=100, null=True)
